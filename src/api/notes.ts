@@ -1,52 +1,55 @@
 import { Howl, Howler } from "howler";
+import { NoteType } from "../types";
 
-Howler.volume(0.2);
-let src = ["./src/assets/ooo.mp3"];
+Howler.volume(0.05);
 let octave = 0;
-let A: Howl = new Howl({ src });
-let B: Howl = new Howl({ src });
-let C: Howl = new Howl({ src });
-let D: Howl = new Howl({ src });
-let E: Howl = new Howl({ src });
-let F: Howl = new Howl({ src });
-let G: Howl = new Howl({ src });
+let notes = {
+  A: new Howl({ src: ["./public/1Cooox2.mp3"] }),
+  B: new Howl({ src: ["./public/1Dooox2.mp3"] }),
+  C: new Howl({ src: ["./public/1Eooox2.mp3"] }),
+  D: new Howl({ src: ["./public/1Fooox2.mp3"] }),
+  E: new Howl({ src: ["./public/1Gooox2.mp3"] }),
+  F: new Howl({ src: ["./public/2Aooox2.mp3"] }),
+  G: new Howl({ src: ["./public/2Booox2.mp3"] }),
+};
 
-function playSound(note: string) {
+function playNote(note: NoteType) {
   let cleanNote = note.toUpperCase();
+
   switch (cleanNote) {
     case "A": {
-      A.rate(0.7 + octave);
-      A.play();
+      // notes.A.rate(0.7 + octave);
+      notes.A.play();
       break;
     }
     case "B": {
-      B.rate(0.8 + octave);
-      B.play();
+      // notes.B.rate(0.8 + octave);
+      notes.B.play();
       break;
     }
     case "C": {
-      C.rate(0.9 + octave);
-      C.play();
+      // notes.C.rate(0.9 + octave);
+      notes.C.play();
       break;
     }
     case "D": {
-      D.rate(1.1 + octave);
-      D.play();
+      // notes.D.rate(1.1 + octave);
+      notes.D.play();
       break;
     }
     case "E": {
-      E.rate(1.2 + octave);
-      E.play();
+      // notes.E.rate(1.2 + octave);
+      notes.E.play();
       break;
     }
     case "F": {
-      F.rate(1.3 + octave);
-      F.play();
+      // notes.F.rate(1.3 + octave);
+      notes.F.play();
       break;
     }
     case "G": {
-      G.rate(1.4 + octave);
-      G.play();
+      // notes.G.rate(1.4 + octave);
+      notes.G.play();
       break;
     }
     default: {
@@ -55,4 +58,21 @@ function playSound(note: string) {
   }
 }
 
-export { playSound };
+function setOctave(val: number) {
+  octave = val;
+}
+
+function playMelody(melody: Array<NoteType>) {
+  playNoteRec(melody, 0);
+  function playNoteRec(arr: string[], i: number) {
+    if (i < arr.length) {
+      setTimeout(function () {
+        console.log(arr[i]);
+        playNote(arr[i]);
+        playNoteRec(arr, i + 1);
+      }, 500);
+    }
+  }
+}
+
+export { playNote, octave, setOctave, playMelody };

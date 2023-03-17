@@ -1,4 +1,4 @@
-import { playSound } from "../api/notes";
+import { playNote } from "../api/notes";
 
 type NoteButtonProps = {
   note: string;
@@ -7,7 +7,7 @@ type NoteButtonProps = {
 export default function NoteButton({ note }: NoteButtonProps) {
   return (
     <button
-      onClick={() => playSound(note)}
+      onClick={() => playNote(note)}
       className="w-24 rounded-xl bg-slate-200 p-4 text-3xl"
     >
       {note}
